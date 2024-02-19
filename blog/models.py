@@ -11,6 +11,8 @@ from daneshop.models import BaseModel
 
 class Category(BaseModel):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True, default="")
+
     parent = models.ForeignKey(
         "self",
         null=True,
@@ -21,6 +23,11 @@ class Category(BaseModel):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def get_ancestors(self) -> List:
         ancestors: list = []
