@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
@@ -25,6 +27,7 @@ class Post(BaseModel):
 
     published_at = models.DateTimeField(null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
