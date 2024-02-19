@@ -3,3 +3,6 @@ venv*
 
 # editor cache file
 __pycache__
+
+# .gitignore
+.env
