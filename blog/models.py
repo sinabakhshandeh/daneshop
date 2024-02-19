@@ -2,12 +2,13 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 from daneshop.models import BaseModel
 
 
-class Category(models.Model):
+class Category(BaseModel):
     name = models.CharField(max_length=200)
     parent = models.ForeignKey(
         "self",
@@ -42,3 +43,6 @@ class Post(BaseModel):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("blog:post_details", kwargs={"post_slug": self.slug})
