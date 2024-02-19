@@ -30,12 +30,18 @@ class Category(BaseModel):
         super().save(*args, **kwargs)
 
     def get_ancestors(self) -> List:
-        ancestors: list = []
+        ancestors: list = [self]
         category = self
         while category.parent is not None:
             ancestors.insert(0, category.parent)
             category = category.parent
         return ancestors
+
+    def get_absolute_url(self):
+        return reverse(
+            "blog:category_post_list",
+            kwargs={"category_slug": self.slug},
+        )
 
 
 class Post(BaseModel):

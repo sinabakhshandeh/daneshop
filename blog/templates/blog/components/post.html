@@ -1,0 +1,11 @@
+<div class="post-preview">
+    <a href="{{ post.get_absolute_url }}">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <h3 class="post-subtitle">{{ post.content|truncatewords:7}}</h3>
+    </a>
+    <p class="post-meta">
+        Posted by
+        <a href="#!">{{ post.author }}</a>
+        on {{ post.published_at|date:"F d, Y" }}
+    </p>
+</div>

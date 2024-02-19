@@ -1,0 +1,17 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        {% for category in categories %}
+            {% if not forloop.last %}
+                <li class="breadcrumb-item fw-bold">
+                    <a href="{{ category.get_absolute_url }}">{{ category.name|upper }}</a>
+                </li>
+            {% else %}
+                <li class="breadcrumb-item fw-bold active " aria-current="page">
+                    <a class="" href="{{ category.get_absolute_url }}">
+                        {{ category.name|upper }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+</nav>

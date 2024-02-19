@@ -13,7 +13,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
                         <h1>Our Blog Shop</h1>
-                        <span class="subheading">A Blog for who wants to have Infenity</span>
+                        <span class="subheading mb-3">A Blog for who wants to have Infenity</span>
                     </div>
                 </div>
             </div>
@@ -26,23 +26,12 @@
 
                 {% for post in posts %}
                     <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="{{ post.get_absolute_url }}">
-                            <h2 class="post-title">{{ post.title }}</h2>
-                            <h3 class="post-subtitle">{{ post.content|truncatewords:7}}</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">{{ post.author }}</a>
-                            on {{ post.published_at|date:"F d, Y" }}
-                        </p>
-                    </div>
+                    {% include "blog/components/post.html" with post=post %}
                     <!-- Divider-->
                     <hr class="my-4" />
                 {% endfor %}
                 <!-- Pager-->
                 <div class="d-flex justify-content-between">
-
                     {% if posts.has_previous %}
                     <div class="mb-4">
                         <a class="btn btn-primary text-uppercase" href="?page={{ posts.previous_page_number }}">New Posts →</a>
