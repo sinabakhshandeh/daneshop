@@ -31,25 +31,28 @@ class Command(BaseCommand):
                 num += 1
             return slug
 
+        def generate_unique_category():
+            while True:
+                name = fake.word()
+                category, created = Category.objects.get_or_create(name=name)
+                if created:
+                    return category
+
         def generate_random_data(user):
-
-            # Create a category
-            category = Category.objects.create(name=fake.word())
-
             # Create a post
             post = Post(
                 title=fake.sentence(),
-                content=fake.text(),
+                content=fake.text(max_nb_chars=10000),
                 published_at=fake.date_time_this_decade(),
                 slug=generate_unique_slug(),
                 author=user,
-                category=category,
+                category=generate_unique_category(),
                 status=random.choice(self.STATUS),
             )
             post.save()
 
         # Generate 10 random posts
-        for _ in range(10):
+        for _ in range(100):
             generate_random_data(user)
 
         self.stdout.write(
