@@ -5,8 +5,6 @@
     Danesh Shop BLog
 {% endblock title %}
 
-
-
 {% block content %}
     <!-- Page Header-->
     <header class="masthead" style="background-image: url('../../../static/blog/assets/img/home-bg.jpg')">
@@ -29,7 +27,7 @@
                 {% for post in posts %}
                     <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href="{{ post.get_absolute_url }}">
                             <h2 class="post-title">{{ post.title }}</h2>
                             <h3 class="post-subtitle">{{ post.content|truncatewords:7}}</h3>
                         </a>
@@ -43,7 +41,20 @@
                     <hr class="my-4" />
                 {% endfor %}
                 <!-- Pager-->
-                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                <div class="d-flex justify-content-between">
+
+                    {% if posts.has_previous %}
+                    <div class="mb-4">
+                        <a class="btn btn-primary text-uppercase" href="?page={{ posts.previous_page_number }}">New Posts →</a>
+                    </div>
+                    {% endif %}
+
+                    {% if posts.has_next %}
+                    <div class="mb-4">
+                        <a class="btn btn-primary text-uppercase" href="?page={{ posts.next_page_number }}">Old Posts →</a>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

@@ -16,3 +16,8 @@ def post_list_view(page: int) -> QuerySet:
         # If page is out of range (e.g. 9999), deliver last page of results.
         posts = paginator.page(paginator.num_pages)
     return posts
+
+
+def post_details_view(slug: str) -> Post:
+    post = Post.objects.filter(slug=slug).first()
+    return post
