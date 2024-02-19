@@ -1,4 +1,5 @@
 import uuid
+from typing import List
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -20,6 +21,14 @@ class Category(BaseModel):
 
     def __str__(self):
         return self.name
+
+    def get_ancestors(self) -> List:
+        ancestors: list = []
+        category = self
+        while category.parent is not None:
+            ancestors.insert(0, category.parent)
+            category = category.parent
+        return ancestors
 
 
 class Post(BaseModel):
