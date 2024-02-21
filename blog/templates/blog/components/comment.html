@@ -1,0 +1,11 @@
+{% load static %}
+<img src="{% static 'blog/assets/profile-vector.jpg' %}" class="avatar" alt>
+<div class="post-comments">
+    <a class="fw-bold h4" href="#">{{ comment.author }}</a>
+    <p class="meta mt-0 ">
+        at {{ comment.timestamp}} says :
+    </p>
+    <p class="m-0">
+        {{ comment.text }}
+    </p>
+</div>
