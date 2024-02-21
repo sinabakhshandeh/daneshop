@@ -16,10 +16,9 @@ def post_list_view(request, category_slug: str = ""):
 
 def post_details_view(request, post_slug: str):
     try:
-        post = services.post_details_view(slug=post_slug)
+        post, categories = services.post_details_view(slug=post_slug)
     except Exception:
         raise Http404("Post not found")
-    categories = post.category.get_ancestors()
 
     context = {"post": post, "categories": categories}
     return render(request, "blog/post_details_view.html", context)
