@@ -68,3 +68,27 @@ class Post(BaseModel):
 
     def get_absolute_url(self):
         return reverse("blog:post_details", kwargs={"post_slug": self.slug})
+
+
+class Comment(models.Model):
+    post = models.ForeignKey("Post", on_delete=models.CASCADE)
+    text = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.text
+
+
+class CommentReply(models.Model):
+    comment = models.ForeignKey(
+        "Comment", on_delete=models.CASCADE, related_name="replies"
+    )
+    text = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.text
