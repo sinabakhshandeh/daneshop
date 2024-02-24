@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import Category, Comment, CommentReply, Post
+from blog.models import Category, Comment, CommentReply, Media, Post
 
 
 class PostInline(admin.StackedInline):
@@ -16,7 +16,14 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ("parent",)
 
 
+class Medialine(admin.StackedInline):
+    model = Media
+    extra = 0
+
+
 class PostAdmin(admin.ModelAdmin):
+    inlines = [Medialine]
+
     list_display = ("title", "published_at", "author", "category")
     search_fields = ("title", "content")
     prepopulated_fields = {"slug": ("title",)}
