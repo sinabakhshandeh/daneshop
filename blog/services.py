@@ -30,5 +30,4 @@ def post_list_view(slug: str, page: int) -> QuerySet:
 def post_details_view(slug: str) -> QuerySet:
     post = Post.objects.filter(slug=slug).first()
     categories = post.category.get_ancestors()
-
     return post, categories
