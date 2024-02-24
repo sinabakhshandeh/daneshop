@@ -19,7 +19,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+from daneshop import api
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("blog/", include("blog.urls")),
+    path("v1/api/", include(api)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
