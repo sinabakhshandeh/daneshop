@@ -1,5 +1,6 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import QuerySet
+from django.shortcuts import get_object_or_404
 
 from blog.models import Post
 
@@ -21,14 +22,13 @@ def post_list_view(slug: str, page: int) -> QuerySet:
     categories = None
     posts = Post.objects.filter(status="published")
     if slug:
-        posts = Post.objects.filter(category__slug=slug)
+        posts = posts.filter(category__slug=slug)
         categories = posts.first().category.get_ancestors()
     posts = paginate(query_set=posts, page=page)
     return posts, categories
 
 
 def post_details_view(slug: str) -> QuerySet:
-    post = Post.objects.filter(slug=slug).first()
+    post = get_object_or_404(Post, slug=slug)
     categories = post.category.get_ancestors()
-
     return post, categories
