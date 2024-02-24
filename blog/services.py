@@ -22,7 +22,7 @@ def post_list_view(slug: str, page: int) -> QuerySet:
     categories = None
     posts = Post.objects.filter(status="published")
     if slug:
-        posts = Post.objects.filter(category__slug=slug)
+        posts = posts.filter(category__slug=slug)
         categories = posts.first().category.get_ancestors()
     posts = paginate(query_set=posts, page=page)
     return posts, categories

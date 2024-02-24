@@ -6,8 +6,8 @@ from blog.api import serializers
 
 
 @api_view(["GET"])
-def post_list_api(request):
-    posts, categories = services.post_list_view(slug="", page=1)
+def post_list_api(request, category_slug: str = ""):
+    posts, categories = services.post_list_view(slug=category_slug, page=1)
     serialize = serializers.PostSerializer(instance=posts, many=True)
     return Response(serialize.data)
 
