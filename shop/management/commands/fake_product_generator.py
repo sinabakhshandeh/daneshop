@@ -53,13 +53,11 @@ class Command(BaseCommand):
             )
             product.save()
 
-            price = ProductPrice.objects.create(
+            ProductPrice.objects.create(
                 product=product,
                 price=random.randint(50, 70),
                 effective_date=fake.date_time_this_decade(),
             )
-            price.price = random.randint(50, 70)
-            price.save()
 
         genrate_category()
         # Generate 100 random products
