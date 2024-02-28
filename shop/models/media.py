@@ -41,4 +41,4 @@ class ProductMedia(BaseModel):
     )
 
     def __str__(self):
-        return f"{self.file_type}: {os.path.basename(self.media.name)}"
+        return f"{self.file_type}: {self.product.title}"
