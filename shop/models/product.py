@@ -4,6 +4,7 @@ from django.db.models import JSONField
 from daneshop.models import BaseModel
 
 from .category import ProductCategory
+from .price import ProductPrice
 
 
 class Product(BaseModel):
@@ -16,6 +17,10 @@ class Product(BaseModel):
     description = models.TextField()
 
     attributes = JSONField(blank=True, null=True)
+
+    @property
+    def last_price(self):
+        return ProductPrice.objects.all().filter(product=self).last()
 
     class Meta:
         verbose_name = "Product"
