@@ -10,5 +10,10 @@ class ProductPrice(BaseModel):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     effective_date = models.DateField()
 
+    class Meta:
+        verbose_name = "Product Price"
+        verbose_name_plural = "Product Prices"
+        ordering = ("effective_date",)
+
     def __str__(self):
         return f"{self.product.title} - {self.price} - {self.effective_date}"
