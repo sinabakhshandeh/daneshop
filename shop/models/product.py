@@ -4,6 +4,7 @@ from django.db.models import JSONField
 from daneshop.models import BaseModel
 
 from .category import ProductCategory
+from .media import ProductMedia
 from .price import ProductPrice
 
 
@@ -21,6 +22,17 @@ class Product(BaseModel):
     @property
     def last_price(self):
         return ProductPrice.objects.all().filter(product=self).last()
+
+    @property
+    def get_media(self):
+        return (
+            ProductMedia.objects.all()
+            .filter(
+                product=self,
+                file_type="image",
+            )
+            .first()
+        )
 
     class Meta:
         verbose_name = "Product"
