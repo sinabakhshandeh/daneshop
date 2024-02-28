@@ -17,7 +17,7 @@ def author_title_upload_path(instance, filename):
     return os.path.join(path, unique_filename)
 
 
-class Media(BaseModel):
+class ProductMedia(BaseModel):
     class FileType(models.TextChoices):
         IMAGE = "image", _("IMAGE")
         VIDEO = "video", _("VIDEO")
