@@ -3,7 +3,7 @@ import random
 from django.core.management.base import BaseCommand
 from faker import Faker
 
-from shop.models import Product, ProductCategory
+from shop.models import Product, ProductCategory, ProductPrice
 
 
 class Command(BaseCommand):
@@ -44,17 +44,25 @@ class Command(BaseCommand):
 
         def generate_random_data():
             # Create a Product
-            post = Product(
+            product = Product(
                 title=fake.word(),
                 slug=generate_unique_slug(),
                 description=fake.text(max_nb_chars=10000),
                 category=get_random_category(),
                 status=random.choice(self.STATUS),
             )
-            post.save()
+            product.save()
+
+            price = ProductPrice.objects.create(
+                product=product,
+                price=random.randint(50, 70),
+                effective_date=fake.date_time_this_decade(),
+            )
+            price.price = random.randint(50, 70)
+            price.save()
 
         genrate_category()
-        # Generate 100 random posts
+        # Generate 100 random products
         for _ in range(100):
             generate_random_data()
 
