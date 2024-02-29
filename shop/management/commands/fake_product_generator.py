@@ -36,7 +36,7 @@ class Command(BaseCommand):
                 "Games",
             ]
             for cat in cats:
-                ProductCategory.objects.create(name=cat)
+                ProductCategory.objects.create(name=cat, status="published")
 
         def get_random_category():
             category_objects = ProductCategory.objects.all()
