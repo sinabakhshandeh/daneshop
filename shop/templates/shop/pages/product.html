@@ -1,4 +1,4 @@
-{% extends 'shop/pages/main.html' %}
+{% extends 'shop/base.html' %}
 {% load static %}
 {% load my_tags %}
 
@@ -9,7 +9,13 @@
 
 
 {% block content %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8" id="alert">
 
+                </div>
+            </div>
+        </div>
         <!-- Product section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
@@ -32,13 +38,18 @@
                             <span>${{ product.last_price.price}}</span>
                         </div>
                         <p class="lead">{{ product.description|truncatewords:50 }}</p>
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
-                            </button>
-                        </div>
+                        <form action="" method="POST">
+                            <div class="d-flex">
+                                {% csrf_token %}
+                                <input class="form-control text-center me-3" id="quantity" type="num" value="1" style="max-width: 3rem" />
+                                <input id="product_slug" type="hidden" value="{{ product.slug }}"/>
+
+                                <button id="addToCart" class="btn btn-outline-dark flex-shrink-0" type="">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Add to cart
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -77,5 +88,4 @@
                 </div>
             </div>
         </section>
-
 {% endblock content %}
