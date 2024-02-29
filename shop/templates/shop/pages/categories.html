@@ -23,7 +23,7 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
                     <div class="list-group">
                         {% for cat in categories %}
-                            <a href="#" class="list-group-item list-group-item-action">{{ cat.name|title }}</a>
+                            <a href="{% url 'shop:category_products' cat.slug %}" class="list-group-item list-group-item-action list-group-item-action">{{ cat.name|title }}</a>
                         {% endfor %}
                     </div>
                 </div>

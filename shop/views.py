@@ -3,8 +3,8 @@ from django.shortcuts import render
 from shop import services
 
 
-def shop_product_list_view(request):
-    products = services.get_products_list()
+def shop_product_list_view(request, category_slug: str = ""):
+    products = services.get_products_list(category_slug)
     context = {"products": products}
     return render(request, "shop/pages/main.html", context)
 
