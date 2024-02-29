@@ -11,4 +11,5 @@ urlpatterns = [
         views.shop_product_details_view,
         name="product_details",
     ),
+    path("categories/", views.shop_category_list_view, name="categories"),
 ]

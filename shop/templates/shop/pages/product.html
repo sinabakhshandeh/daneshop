@@ -16,9 +16,13 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
 
                     {% if product.get_media %}
-                        <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.get_media.file.url }}" alt="..." /></div>
+                        <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
+                            style="object-fit: cover;"
+                            src="{{ product.get_media.file.url }}" alt="..." /></div>
                     {% else %}
-                        <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{% static 'shop/toy_image.webp' %}" alt="..." /></div>
+                        <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
+                            style="object-fit: cover;"
+                            src="{% static 'shop/toy_image.webp' %}" alt="..." /></div>
                     {% endif %}
 
                     <div class="col-md-6">
