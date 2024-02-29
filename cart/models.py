@@ -2,12 +2,24 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from daneshop.models import BaseModel
 from shop.models import Product
 
 
 class Cart(BaseModel):
+    class CartStatus(models.TextChoices):
+        PAID = "paid", _("PAID")
+        NOT_PAID = "not_paid", _("NO_TPAID")
+
+    cart_status = models.CharField(
+        max_length=25,
+        choices=CartStatus.choices,
+        default=CartStatus.NOT_PAID,
+        help_text=_("Status"),
+    )
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
