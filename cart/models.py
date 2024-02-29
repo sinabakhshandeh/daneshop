@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -11,6 +13,7 @@ class Cart(BaseModel):
         on_delete=models.CASCADE,
         related_name="carts",
     )
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
     def __str__(self):
         return f"Cart for {self.user.username}"
