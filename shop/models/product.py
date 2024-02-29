@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import JSONField
+from django.urls import reverse
 
 from daneshop.models import BaseModel
 
@@ -41,3 +42,9 @@ class Product(BaseModel):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse(
+            "shop:product_details",
+            kwargs={"product_slug": self.slug},
+        )
