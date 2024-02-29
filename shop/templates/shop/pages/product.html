@@ -39,6 +39,31 @@
                 </div>
             </div>
         </section>
+        <!-- Product Details -->
+        <section class="py-5 bg-light">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="table-responsive">
+                            <table class="table text-start">
+                            <tbody>
+
+                                {% for attr, val in product.attributes.items %}
+                                    <tr>
+                                        <th scope="row" class="text-start">{{attr}}</th>
+                                        <td>
+                                            {{ val }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Related items section-->
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
