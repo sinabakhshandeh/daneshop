@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y libpq-dev gcc
 COPY . /app/
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+RUN python3 manage.py collectstatic --no-input
 
 # Expose port 8000
 EXPOSE 8000
