@@ -50,6 +50,13 @@ class Command(BaseCommand):
                 description=fake.text(max_nb_chars=10000),
                 category=get_random_category(),
                 status=random.choice(self.STATUS),
+                attributes={
+                    "color": random.choice(["Red", "Brown", "Yellow"]),
+                    "size": random.choice(["Medium", "Small", "Large"]),
+                    "recommended_age": random.choice(
+                        ["6-12 Years old", "3-6 Years old", "1-3 Years old"],
+                    ),
+                },
             )
             product.save()
 
