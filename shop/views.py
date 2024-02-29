@@ -4,7 +4,8 @@ from shop import services
 
 
 def shop_product_list_view(request, category_slug: str = ""):
-    products = services.get_products_list(category_slug)
+    page_number = request.GET.get("page", 1)
+    products = services.get_products_list(category_slug, page_number)
     context = {"products": products}
     return render(request, "shop/pages/main.html", context)
 
