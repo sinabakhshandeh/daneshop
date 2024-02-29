@@ -1,7 +1,6 @@
 from django import template
 
-from shop.models.category import ProductCategory
-from shop.models.product import Product
+from shop.models import Product, ProductCategory
 
 register = template.Library()
 

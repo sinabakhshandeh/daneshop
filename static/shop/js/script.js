@@ -37,7 +37,7 @@ $(document).ready(function() {
                 if (response == "success"){
                     console.log("tada");
                     createDynamicAlert();
-                    setTimeout(removeDynamicAlert, 3000);
+                    setTimeout(removeDynamicAlert, 1000);
                 }
             },
             error: function(xhr, errmsg, err) {

@@ -2,6 +2,7 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from daneshop.models import BaseModel
@@ -36,6 +37,9 @@ class Cart(BaseModel):
             return True
         else:
             return False
+
+    def get_absolute_url(self):
+        return reverse("cart:cart_details", kwargs={"cart_uuid": self.uuid})
 
 
 class CartItem(BaseModel):
