@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponse, render
+from django.shortcuts import HttpResponse, redirect, render
 
 from cart import services
 from cart.forms import CartItemForm
@@ -20,3 +20,9 @@ def add_item(request):
             services.add_item(request, product_slug, quantity)
             return HttpResponse("success")
     return HttpResponse("fail")
+
+
+def pay(request):
+    if request.method == "POST":
+        services.pay(request)
+    return redirect("shop:home")

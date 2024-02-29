@@ -38,5 +38,11 @@ def add_item(request, product_slug: str, quantity: int):
         item.quantity += quantity
         item.save()
 
-    # print(cart, product, quantity)
     return {"message": "success"}
+
+
+def pay(request):
+    user = request.user
+    cart = Cart.objects.filter(user=user, cart_status="not_paid").last()
+    cart.cart_status = "paid"
+    cart.save()
