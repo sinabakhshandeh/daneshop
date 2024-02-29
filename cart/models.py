@@ -30,6 +30,13 @@ class Cart(BaseModel):
     def __str__(self):
         return f"Cart for {self.user.username}"
 
+    def is_defined(self, product: Product):
+        item = CartItem.objects.filter(cart=self, product=product)
+        if item.exists():
+            return True
+        else:
+            return False
+
 
 class CartItem(BaseModel):
     cart = models.ForeignKey(
