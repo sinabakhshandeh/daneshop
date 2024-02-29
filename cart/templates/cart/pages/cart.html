@@ -1,0 +1,52 @@
+{% extends 'shop/base.html' %}
+{% load cart_tags %}
+
+{% block title %}
+    Cart {{ cart.uuid }}
+{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <main>
+
+      <div class="row g-5">
+        <div class="col-md col-lg order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Your cart</span>
+            <span class="badge bg-primary rounded-pill">
+              {% cart_items_count cart.uuid%}
+            </span>
+          </h4>
+          <ul class="list-group mb-3">
+
+            {% for item in items %}
+
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                  <h6 class="my-0">{{ item.product.title|title }}</h6>
+                  <small class="text-body-secondary">{{ item.product.description|truncatechars:40 }}</small>
+                  <small>
+                    <a href="{% url 'shop:product_details' item.product.slug %}">more</a>
+                  </small>
+                </div>
+                <span></span>
+                <span class="text-body-secondary">
+                  ({{ item.quantity }}) &#xd7 ${{ item.product.last_price.price }} = <strong>{{ item.total_price }}</strong>
+                </span>
+              </li>
+
+            {% endfor %}
+
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>${% cart_total_price cart.uuid %}</strong>
+            </li>
+
+          </ul>
+        </div>
+         </div>
+    </main>
+
+  </div>
+{% endblock content %}
