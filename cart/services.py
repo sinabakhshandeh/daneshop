@@ -46,3 +46,8 @@ def pay(request):
     cart = Cart.objects.filter(user=user, cart_status="not_paid").last()
     cart.cart_status = "paid"
     cart.save()
+
+
+def get_carts_list(request):
+    user = request.user
+    return Cart.objects.filter(user=user)

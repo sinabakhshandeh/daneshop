@@ -26,3 +26,9 @@ def pay(request):
     if request.method == "POST":
         services.pay(request)
     return redirect("shop:home")
+
+
+def carts_list(request):
+    carts = services.get_carts_list(request)
+    context = {"carts": carts}
+    return render(request, "cart/pages/carts.html", context)

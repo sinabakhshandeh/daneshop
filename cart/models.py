@@ -28,6 +28,9 @@ class Cart(BaseModel):
     )
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
+    class Meta:
+        ordering = ("-created_at",)
+
     def __str__(self):
         return f"Cart for {self.user.username}"
 

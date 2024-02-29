@@ -1,0 +1,40 @@
+{% extends 'shop/base.html' %}
+
+
+{% block title %}
+    Carts
+{% endblock title %}
+
+
+
+{% block content %}
+<div class="container">
+    <h3>Cards</h3>
+    <div class="row">
+
+        {% for cart in carts %}
+            <div class="col-12 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <h5 class="card-title">Cart unique id: {{ cart.uuid }}</h5>
+                        </div>
+                        <div class="col-auto">
+                            <span><small>
+                                Status: <span class="text-success">{{cart.cart_status}}</span>
+                            </small></span>
+                        </div>
+                    </div>
+                    <p class="card-text">Pay at {{ cart.updated_at }}
+
+                    </p>
+                    <a href="{% url 'cart:cart_details' cart.uuid %}" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock content %}
